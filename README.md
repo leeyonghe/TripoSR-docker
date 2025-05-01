@@ -1,77 +1,84 @@
-# TripoSR <a href="https://huggingface.co/stabilityai/TripoSR"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Model_Card-Huggingface-orange"></a> <a href="https://huggingface.co/spaces/stabilityai/TripoSR"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Gradio%20Demo-Huggingface-orange"></a> <a href="https://huggingface.co/papers/2403.02151"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Paper-Huggingface-orange"></a> <a href="https://arxiv.org/abs/2403.02151"><img src="https://img.shields.io/badge/Arxiv-2403.02151-B31B1B.svg"></a> <a href="https://discord.gg/mvS9mCfMnQ"><img src="https://img.shields.io/badge/Discord-%235865F2.svg?logo=discord&logoColor=white"></a>
+# TripoSR: Fast 3D Object Reconstruction from a Single Image
 
-<div align="center">
-  <img src="figures/teaser800.gif" alt="Teaser Video">
-</div>
+TripoSR은 단일 이미지로부터 빠르게 3D 객체를 재구성하는 오픈소스 프로젝트입니다. 이 프로젝트는 고품질의 3D 모델을 생성하는 동시에 빠른 처리 속도를 제공합니다.
 
-This is the official codebase for **TripoSR**, a state-of-the-art open-source model for **fast** feedforward 3D reconstruction from a single image, collaboratively developed by [Tripo AI](https://www.tripo3d.ai/) and [Stability AI](https://stability.ai/).
-<br><br>
-Leveraging the principles of the [Large Reconstruction Model (LRM)](https://yiconghong.me/LRM/), TripoSR brings to the table key advancements that significantly boost both the speed and quality of 3D reconstruction. Our model is distinguished by its ability to rapidly process inputs, generating high-quality 3D models in less than 0.5 seconds on an NVIDIA A100 GPU. TripoSR has exhibited superior performance in both qualitative and quantitative evaluations, outperforming other open-source alternatives across multiple public datasets. The figures below illustrate visual comparisons and metrics showcasing TripoSR's performance relative to other leading models. Details about the model architecture, training process, and comparisons can be found in this [technical report](https://arxiv.org/abs/2403.02151).
+## 주요 특징
 
-<!--
-<div align="center">
-  <img src="figures/comparison800.gif" alt="Teaser Video">
-</div>
--->
-<p align="center">
-    <img width="800" src="figures/visual_comparisons.jpg"/>
-</p>
+- **빠른 처리 속도**: 단일 이미지에서 3D 모델을 0.5초 이내에 생성
+- **고품질 결과**: 상세한 텍스처와 정확한 3D 구조
+- **사용자 친화적 인터페이스**: Gradio 기반의 웹 인터페이스 제공
+- **Docker 지원**: 간편한 배포와 실행을 위한 Docker 컨테이너화
 
-<p align="center">
-    <img width="450" src="figures/scatter-comparison.png"/>
-</p>
+## 시스템 요구사항
 
+- NVIDIA GPU (CUDA 지원)
+- Docker 및 Docker Compose
+- NVIDIA Container Toolkit
 
-The model is released under the MIT license, which includes the source code, pretrained models, and an interactive online demo. Our goal is to empower researchers, developers, and creatives to push the boundaries of what's possible in 3D generative AI and 3D content creation.
+## 설치 및 실행
 
-## Getting Started
-### Installation
-- Python >= 3.8
-- Install CUDA if available
-- Install PyTorch according to your platform: [https://pytorch.org/get-started/locally/](https://pytorch.org/get-started/locally/) **[Please make sure that the locally-installed CUDA major version matches the PyTorch-shipped CUDA major version. For example if you have CUDA 11.x installed, make sure to install PyTorch compiled with CUDA 11.x.]**
-- Update setuptools by `pip install --upgrade setuptools`
-- Install other dependencies by `pip install -r requirements.txt`
+### Docker를 사용한 설치
 
-### Manual Inference
-```sh
-python run.py examples/chair.png --output-dir output/
+1. 저장소 클론:
+```bash
+git clone https://github.com/your-username/TripoSR.git
+cd TripoSR
 ```
-This will save the reconstructed 3D model to `output/`. You can also specify more than one image path separated by spaces. The default options takes about **6GB VRAM** for a single image input.
 
-If you would like to output a texture instead of vertex colors, use the `--bake-texture` option. You may also use `--texture-resolution` to specify the resolution in pixels of the output texture.
+2. Docker 컨테이너 실행:
+```bash
+docker-compose up --build
+```
 
-For detailed usage of this script, use `python run.py --help`.
+3. 웹 브라우저에서 접속:
+```
+http://localhost:7860
+```
 
-### Local Gradio App
-```sh
+### 직접 설치
+
+1. Python 3.10 이상 설치
+
+2. 의존성 설치:
+```bash
+pip install -r requirements.txt
+```
+
+3. 애플리케이션 실행:
+```bash
 python gradio_app.py
 ```
 
-## Troubleshooting
-> AttributeError: module 'torchmcubes_module' has no attribute 'mcubes_cuda'
+## 사용 방법
 
-or
+1. 웹 인터페이스에 접속
+2. 이미지를 업로드
+3. "Generate" 버튼 클릭
+4. 생성된 3D 모델 확인
 
-> torchmcubes was not compiled with CUDA support, use CPU version instead.
+## 예제
 
-This is because `torchmcubes` is compiled without CUDA support. Please make sure that 
+프로젝트는 다양한 예제 이미지를 포함하고 있습니다:
+- `examples/` 디렉토리에서 다양한 입력 이미지 확인 가능
+- `figures/` 디렉토리에서 결과물 예시 확인 가능
 
-- The locally-installed CUDA major version matches the PyTorch-shipped CUDA major version. For example if you have CUDA 11.x installed, make sure to install PyTorch compiled with CUDA 11.x.
-- `setuptools>=49.6.0`. If not, upgrade by `pip install --upgrade setuptools`.
+## 기술 스택
 
-Then re-install `torchmcubes` by:
+- **프론트엔드**: Gradio
+- **백엔드**: Python
+- **딥러닝 프레임워크**: PyTorch
+- **3D 렌더링**: ModernGL
+- **컨테이너화**: Docker
 
-```sh
-pip uninstall torchmcubes
-pip install git+https://github.com/tatsy/torchmcubes.git
-```
+## 라이센스
 
-## Citation
-```BibTeX
-@article{TripoSR2024,
-  title={TripoSR: Fast 3D Object Reconstruction from a Single Image},
-  author={Tochilkin, Dmitry and Pankratz, David and Liu, Zexiang and Huang, Zixuan and and Letts, Adam and Li, Yangguang and Liang, Ding and Laforte, Christian and Jampani, Varun and Cao, Yan-Pei},
-  journal={arXiv preprint arXiv:2403.02151},
-  year={2024}
-}
-```
+이 프로젝트는 MIT 라이센스 하에 배포됩니다. 자세한 내용은 [LICENSE](LICENSE) 파일을 참조하세요.
+
+## 기여
+
+기여를 환영합니다! 이슈 보고, 기능 요청, 또는 풀 리퀘스트를 통해 프로젝트에 기여할 수 있습니다.
+
+## 참고 자료
+
+- [원본 논문](https://arxiv.org/abs/your-paper)
+- [GitHub 저장소](https://github.com/your-username/TripoSR)
