@@ -1,6 +1,12 @@
-# TripoSR: Fast 3D Object Reconstruction from a Single Image
+# TripoSR: Fast 3D Object Reconstruction from a Single Image (Docker Version)
 
-TripoSR은 단일 이미지로부터 빠르게 3D 객체를 재구성하는 오픈소스 프로젝트입니다. 이 프로젝트는 고품질의 3D 모델을 생성하는 동시에 빠른 처리 속도를 제공합니다.
+이 저장소는 [원본 TripoSR 프로젝트](https://github.com/VAST-AI-Research/TripoSR)의 Docker 버전입니다. 원본 프로젝트는 단일 이미지로부터 빠르게 3D 객체를 재구성하는 오픈소스 프로젝트이며, 이 저장소는 이를 Docker 컨테이너로 쉽게 실행할 수 있도록 구성되어 있습니다.
+
+## 원본 프로젝트 정보
+
+- **원본 저장소**: [VAST-AI-Research/TripoSR](https://github.com/VAST-AI-Research/TripoSR)
+- **원작자**: VAST-AI-Research
+- **라이센스**: MIT License
 
 ## 주요 특징
 
@@ -21,8 +27,8 @@ TripoSR은 단일 이미지로부터 빠르게 3D 객체를 재구성하는 오�
 
 1. 저장소 클론:
 ```bash
-git clone https://github.com/your-username/TripoSR.git
-cd TripoSR
+git clone https://github.com/leeyonghe/TripoSR-docker.git
+cd TripoSR-docker
 ```
 
 2. Docker 컨테이너 실행:
@@ -35,19 +41,9 @@ docker-compose up --build
 http://localhost:7860
 ```
 
-### 직접 설치
+### 직접 설치 (원본 프로젝트 방식)
 
-1. Python 3.10 이상 설치
-
-2. 의존성 설치:
-```bash
-pip install -r requirements.txt
-```
-
-3. 애플리케이션 실행:
-```bash
-python gradio_app.py
-```
+원본 프로젝트의 설치 방법은 [원본 저장소](https://github.com/VAST-AI-Research/TripoSR)를 참조하세요.
 
 ## 사용 방법
 
@@ -72,4 +68,14 @@ python gradio_app.py
 
 ## 라이센스
 
-이 프로젝트는 MIT 라이센스 하에 배포됩니다. 자세한 내용은 [LICENSE](LICENSE) 파일을 참조하세요.
+이 프로젝트는 원본 프로젝트와 동일한 MIT 라이센스 하에 배포됩니다. 자세한 내용은 [LICENSE](LICENSE) 파일을 참조하세요.
+
+## 기여
+
+기여를 환영합니다! 이슈 보고, 기능 요청, 또는 풀 리퀘스트를 통해 프로젝트에 기여할 수 있습니다.
+
+## 참고 자료
+
+- [원본 논문](https://arxiv.org/abs/your-paper)
+- [원본 GitHub 저장소](https://github.com/VAST-AI-Research/TripoSR)
+- [Docker 버전 저장소](https://github.com/leeyonghe/TripoSR-docker)
