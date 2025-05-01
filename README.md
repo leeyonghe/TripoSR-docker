@@ -73,12 +73,3 @@ python gradio_app.py
 ## 라이센스
 
 이 프로젝트는 MIT 라이센스 하에 배포됩니다. 자세한 내용은 [LICENSE](LICENSE) 파일을 참조하세요.
-
-## 기여
-
-기여를 환영합니다! 이슈 보고, 기능 요청, 또는 풀 리퀘스트를 통해 프로젝트에 기여할 수 있습니다.
-
-## 참고 자료
-
-- [원본 논문](https://arxiv.org/abs/your-paper)
-- [GitHub 저장소](https://github.com/your-username/TripoSR)
